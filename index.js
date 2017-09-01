@@ -26,8 +26,7 @@ let MyForm = {
     getData: () => {
         const fio = document.getElementById('fio').value,
             phone = document.getElementById('phone').value,
-            email = document.getElementById('email').value,
-            data = {};
+            email = document.getElementById('email').value;
 
         return {
             fio: fio,
@@ -37,7 +36,7 @@ let MyForm = {
     },
 
     setData: (data) => { 
-        const fio = document.getElementById('fio'),
+        let fio = document.getElementById('fio'),
             phone = document.getElementById('phone'),
             email = document.getElementById('email');
 
@@ -50,8 +49,9 @@ let MyForm = {
         event.preventDefault();
 
         const validateData = MyForm.validate(),
-            submitButton = document.getElementById('submitButton'),
-            data = MyForm.getData();
+			data = MyForm.getData();
+			
+		let submitButton = document.getElementById('submitButton');
 
         removeAllErrorClasses();
 
@@ -84,7 +84,7 @@ function requestToJsonFile(){
             } else if (data.status === 'progress') {
                 resultContainer.className = 'progress';
                 setTimeout(() => {
-                    fetchJSONFile();
+                    requestToJsonFile();
                 }, data.timeout);
             }
         }
@@ -92,7 +92,7 @@ function requestToJsonFile(){
 }
 
 function removeAllErrorClasses(){
-    const fio = document.getElementById('fio'),
+    let fio = document.getElementById('fio'),
         phone = document.getElementById('phone'),
         email = document.getElementById('email');
 
@@ -118,9 +118,9 @@ function validateFio(fio){
 }
 
 function validateEmail(email){
-    let emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-        domainArray = ['ya.ru', 'yandex.ru', 'yandex.ua', 'yandex.by', 'yandex.kz', 'yandex.com'],
-        isEmailValid = false;
+    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        domainArray = ['ya.ru', 'yandex.ru', 'yandex.ua', 'yandex.by', 'yandex.kz', 'yandex.com'];
+	let isEmailValid = false;
 
     if (emailRegex.test(email)){
         domainArray.map((domain) => {
